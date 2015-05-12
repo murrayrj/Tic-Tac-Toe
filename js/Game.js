@@ -1,19 +1,15 @@
 var board = [0,0,0,0,0,0,0,0,0]
 var winningPlayer = 0;
-var turn = {number : 0,
-  currentPlayer:function() {
-    if (this.number % 2 === 0) {
-      return 1;
-    }
-    else {
-      return 2;
-    }
-  },
-  changeTurn:function(){
-    this.number += 1;
-  }
+var turn = 0;
+var currentPlayer = 1;
+function changeTurn(){
+  if (turn % 2 === 0){
+    currentPlayer = 2;
+  }else{
+    currentPlayer = 1;
+  } 
+  turn += 1;
 };
-
 function winnerCheck(){
   if (
 // rows    
@@ -34,7 +30,6 @@ function winnerCheck(){
     turn.changeTurn();
   }
 };
-
 function tieCheck() {
   for (var i = 0; i<board.length; i++){
     if (board[i]===0){
@@ -55,8 +50,9 @@ $(document).ready(function(){
     // var board = $(this).data("board")
     checkValue(cell)
     if (checkValue(cell) === 0 && winningPlayer === 0) {
-      console.log(cell)  
-      // changeCell(cell);
+      board[cell] = currentPlayer;
+      console.log(board);
+      changeTurn();
       // winnerCheck(); 
     }
   });
