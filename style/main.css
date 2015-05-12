@@ -1,0 +1,10 @@
+table {
+  margin: 0 auto;
+}
+td {
+  border: 1px solid grey;
+  width: 200px;
+  height: 200px;
+  text-align: center;
+  box-sizing:border-box;
+}
