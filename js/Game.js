@@ -8,7 +8,7 @@ function changeTurn(){
     currentPlayer = 2;
   }else{
     currentPlayer = 1;
-  } 
+  }
   turn += 1;
 }
 function winnerCheck(){
@@ -26,7 +26,7 @@ function winnerCheck(){
     (board[2]==currentPlayer && board[4]==currentPlayer && board[6]==currentPlayer)
   ){
     winningPlayer = currentPlayer;
-    alert("Player " + winningPlayer + " is a winner!");
+    $('.result').html("Player " + winningPlayer + " is a winner!");
   }
 }
 function tieCheck(){
@@ -46,6 +46,15 @@ function changeColour(value) {
   }
 }
 
+function takeAChanceOnMe (){
+  var randomCell = Math.floor((Math.random()*9));
+  console.log(randomCell);
+  console.log(checkValue(randomCell));
+  if (checkValue(randomCell) === 0 && winningPlayer === 0) {
+  board[randomCell] = currentPlayer;
+  }
+}
+
 $(document).ready(function(){
   $('.box').click(function(){
     var cell = $(this).data("cell");
@@ -55,6 +64,8 @@ $(document).ready(function(){
       changeColour(cell);
       winnerCheck();
       changeTurn();
+      if(winningPlayer===0){
+      $('.result').html("Player " + currentPlayer + " to move")};
       tieCheck();
     }
   });
