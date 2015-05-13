@@ -8,6 +8,9 @@ td {
   text-align: center;
   box-sizing:border-box;
 }
+.box{
+  margin-bottom: 23px;
+}
 .colour1 {
   background: url("rsz_dog.jpg")
 }
@@ -17,11 +20,23 @@ td {
 }
 body{
   background-color: #AADCBA;
+  margin-top: 30px;
 }
 h1 {
   font-family: Kabel;
   src: url("kabel.ttf");
-  color: #FF2D29;
-  font-size: 62px;
+  color: white;
+  font-size: 72px;
   text-align: center;
+  margin: 0 auto;
+  display: inline-block;
+}
+
+.red {
+  background-color: #FF2D29; 
+  border: 4px solid black; 
+  width: 540px; 
+  height:78px;
+  margin-left: 28.2%;
+  margin-bottom: 30px;
 }
