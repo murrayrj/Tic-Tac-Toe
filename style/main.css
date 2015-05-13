@@ -2,9 +2,26 @@ table {
   margin: 0 auto;
 }
 td {
-  border: 1px solid grey;
-  width: 200px;
-  height: 200px;
+  border: 2.5px solid #FF2D29;
+  width: 150px;
+  height: 150px;
   text-align: center;
   box-sizing:border-box;
+}
+.colour1 {
+  background: url("rsz_dog.jpg")
+}
+
+.colour2 {
+  background: url("rsz_cat.jpg");
+}
+body{
+  background-color: #AADCBA;
+}
+h1 {
+  font-family: Kabel;
+  src: url("kabel.ttf");
+  color: #FF2D29;
+  font-size: 62px;
+  text-align: center;
 }

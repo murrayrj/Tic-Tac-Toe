@@ -2,6 +2,7 @@ var board = [0,0,0,0,0,0,0,0,0];
 var winningPlayer = 0;
 var turn = 0;
 var currentPlayer = 1;
+
 function changeTurn(){
   if (turn % 2 === 0){
     currentPlayer = 2;
@@ -24,26 +25,35 @@ function winnerCheck(){
     (board[0]==currentPlayer && board[4]==currentPlayer && board[8]==currentPlayer) ||
     (board[2]==currentPlayer && board[4]==currentPlayer && board[6]==currentPlayer)
   ){
-  winningPlayer = currentPlayer;
-  alert("Player " + winningPlayer + " is a winner!");
+    winningPlayer = currentPlayer;
+    alert("Player " + winningPlayer + " is a winner!");
   }
 }
 function tieCheck(){
-  if (turn === 9){
+  if (turn === 9 && winningPlayer === 0){
     alert("It's a draw")
   }
 }
-function checkValue(cell) {
-    return(board[cell]);
+function checkValue(e) {
+    return(board[e]);
 }
+function changeColour(value) {
+  var cell = '#' + value;
+  if (currentPlayer === 1){
+    $(cell).addClass('colour1');
+  }else if (currentPlayer === 2){
+    $(cell).addClass('colour2');
+  }
+}
+
 $(document).ready(function(){
   $('.box').click(function(){
     var cell = $(this).data("cell");
     checkValue(cell);
     if (checkValue(cell) === 0 && winningPlayer === 0) {
       board[cell] = currentPlayer;
+      changeColour(cell);
       winnerCheck();
-      console.log(board);
       changeTurn();
       tieCheck();
     }
