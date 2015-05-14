@@ -3,6 +3,7 @@ var winningPlayer = 0;
 var turn = 0;
 var currentPlayer = 1;
 var vsComp = 0;
+var rand = Math.ceil((Math.random()*8))
 
 function initialize(){
   board = [0,0,0,0,0,0,0,0,0];
@@ -60,16 +61,6 @@ function changeColour(value) {
     $(cell).addClass('colour2');
   }
 }
-
-// function takeAChanceOnMe (){
-//   var randomCell = Math.floor((Math.random()*9));
-//   console.log(randomCell);
-//   console.log(checkValue(randomCell));
-//   if (checkValue(randomCell) === 0 && winningPlayer === 0) {
-//   board[randomCell] = currentPlayer;
-//   }
-// }
-
 function computerMove(){
   if(turn===0){
     if(board[4]===0){
@@ -77,21 +68,6 @@ function computerMove(){
     }else{
       return 0;
     }
-  }
-  else if(board[4]===0&&((board[0]!==0&&board[0]===board[8])||(board[2]!==0&&board[2]===board[6]))){
-    return 4;
-  }
-  else if(board[8]===0&&((board[0]!==0&&board[0]===board[4])||(board[5]!==0&&board[5]===board[7]))){
-    return 8;
-  }
-  else if(board[6]===0&&((board[2]!==0&&board[2]===board[4])||(board[3]!==0&&board[3]===board[7]))){
-    return 6;
-  }
-  else if(board[2]===0&&((board[4]!==0&&board[4]===board[6])||(board[1]!==0&&board[1]===board[5]))){
-    return 2;
-  }
-  else if(board[0]===0&&((board[4]!==0&&board[4]===board[8])||(board[1]!==0&&board[1]===board[3]))){
-    return 0;
   }
   for(var i =0; i<9; i++){
     if(i%3===0 && board[i] === board[i+1] && board[i] !== 0 && board[i+2]===0){
@@ -103,16 +79,41 @@ function computerMove(){
     else if(i%3===0 && board[i] === board[i+2] && board[i] !== 0 && board[i+1]===0){
       return i+1;
     }
-    else if(board[i]===board[i+6] && board[i] !== 0 && board[i+3]===0){
-      return i+3;
-    }
-    else if(board[i]===board[i+3] && board[i] !== 0){
+    
+    else if(0!==board[i]===board[i+3]){
       if(i<3 && board[i+6]===0){
         return i+6;
       }else if(board[i-3]===0){
         return i-3;
       }
     }
+    else if(board[i]==board[i+6] && board[i+3]==0){
+      return i+3;
+    }
+  }
+  // if(board[1]==0&&0!==board[0]==board[2]){
+  //   return 1;
+  // }
+  // else if(board[2]==0&&1==board[0]==board[5]==board[8]){
+  //   return 2;
+  // }
+  // else if(board[8]==0&&0!==board[2]==board[5]==board[6]){
+  //   return 8;
+  // }
+  // else if(board[3]==0&&(0!==board[0]===board[8]||board[2]===1&&board[2]===board[6]){
+  //   return 3;
+  // }
+  if(board[8]==0&&(1==board[0]==board[4])||(1==board[5]==board[7])){
+    return 8;
+  }
+  else if(board[6]==0&&(1==board[2]==board[4])||(1==board[3]==board[7])){
+    return 6;
+  }
+  else if(board[2]==0&&(1==board[4]==board[6])||(1==board[1]==board[5])||(1==board[0]==board[8])){
+    return 2;
+  }
+  else if(board[0]==0&&(1==board[4]==board[8])||(1==board[1]==board[3])||(1==board[2]==board[6])){
+    return 0;
   }
 }
 
@@ -129,9 +130,9 @@ $(document).ready(function(){
       if(vsComp===1 && turn%2===0){
         computerMove();
         var bing = computerMove();
-      // console.log(currentPlayer);
-      //   board[bing] = currentPlayer;
-      //   changeColour(bing)
+        currentPlayer = 2;
+        turn++;
+        changeColour(bing);
         console.log(bing);
       }
       winnerCheck();
