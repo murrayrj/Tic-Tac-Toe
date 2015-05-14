@@ -2,18 +2,19 @@ var board = [0,0,0,0,0,0,0,0,0];
 var winningPlayer = 0;
 var turn = 0;
 var currentPlayer = 1;
+var vsComp = 0;
 
 function initialize(){
   board = [0,0,0,0,0,0,0,0,0];
   winningPlayer = 0;
   turn = 0;
   currentPlayer = 1;
-  $('.play').html('')
-  $('.human').html('2 players')
-  $('.computer').html('1 player')
-  $('.result').html("")
-  $('.box').removeClass( "colour1 colour2" )
-};
+  $('.play').html('');
+  $('.human').html('2 players');
+  $('.computer').html('1 player');
+  $('.result').html("");
+  $('.box').removeClass( "colour1 colour2" );
+}
 
 function changeTurn(){
   if (turn % 2 === 0){
@@ -60,46 +61,99 @@ function changeColour(value) {
   }
 }
 
-function takeAChanceOnMe (){
-  var randomCell = Math.floor((Math.random()*9));
-  console.log(randomCell);
-  console.log(checkValue(randomCell));
-  if (checkValue(randomCell) === 0 && winningPlayer === 0) {
-  board[randomCell] = currentPlayer;
+// function takeAChanceOnMe (){
+//   var randomCell = Math.floor((Math.random()*9));
+//   console.log(randomCell);
+//   console.log(checkValue(randomCell));
+//   if (checkValue(randomCell) === 0 && winningPlayer === 0) {
+//   board[randomCell] = currentPlayer;
+//   }
+// }
+
+function computerMove(){
+  if(turn===0){
+    if(board[4]===0){
+      return 4;
+    }else{
+      return 0;
+    }
+  }
+  else if(board[4]===0&&((board[0]!==0&&board[0]===board[8])||(board[2]!==0&&board[2]===board[6]))){
+    return 4;
+  }
+  else if(board[8]===0&&((board[0]!==0&&board[0]===board[4])||(board[5]!==0&&board[5]===board[7]))){
+    return 8;
+  }
+  else if(board[6]===0&&((board[2]!==0&&board[2]===board[4])||(board[3]!==0&&board[3]===board[7]))){
+    return 6;
+  }
+  else if(board[2]===0&&((board[4]!==0&&board[4]===board[6])||(board[1]!==0&&board[1]===board[5]))){
+    return 2;
+  }
+  else if(board[0]===0&&((board[4]!==0&&board[4]===board[8])||(board[1]!==0&&board[1]===board[3]))){
+    return 0;
+  }
+  for(var i =0; i<9; i++){
+    if(i%3===0 && board[i] === board[i+1] && board[i] !== 0 && board[i+2]===0){
+      return i+2;
+    }
+    else if(i%3===1 && board[i] === board[i+1] && board[i] !== 0 && board[i-1]===0){
+      return i-1;
+    }
+    else if(i%3===0 && board[i] === board[i+2] && board[i] !== 0 && board[i+1]===0){
+      return i+1;
+    }
+    else if(board[i]===board[i+6] && board[i] !== 0 && board[i+3]===0){
+      return i+3;
+    }
+    else if(board[i]===board[i+3] && board[i] !== 0){
+      if(i<3 && board[i+6]===0){
+        return i+6;
+      }else if(board[i-3]===0){
+        return i-3;
+      }
+    }
   }
 }
 
 $(document).ready(function(){
   $('.box').click(function(){
-    $('.human').html('')
-    $('.computer').html('')
+    $('.human').html('');
+    $('.computer').html('');
+    $('.result').html('');
     var cell = $(this).data("cell");
     checkValue(cell);
     if (checkValue(cell) === 0 && winningPlayer === 0) {
       board[cell] = currentPlayer;
       changeColour(cell);
+      if(vsComp===1 && turn%2===0){
+        computerMove();
+        var bing = computerMove();
+      // console.log(currentPlayer);
+      //   board[bing] = currentPlayer;
+      //   changeColour(bing)
+        console.log(bing);
+      }
       winnerCheck();
       changeTurn();
-      if(winningPlayer===0){
-        $('.result').html("Player " + currentPlayer + " to move")
-      };
+      if(winningPlayer===0 && vsComp ===0){
+        $('.result').html("Player " + currentPlayer + " to move");
+      }
       tieCheck();
     }
   });
   $('.human').click(function(){
-    $('.result').html("Player 1 to move")
-    $('.human').html('')
-    $('.computer').html('')
+    $('.result').html("Player 1 to move");
+    $('.human').html('');
+    $('.computer').html('');
+  });
+  $('.computer').click(function(){
+    vsComp = 1;
+    $('.human').html('');
+    $('.computer').html('');
+    $('.result').html("You go first");
   });
   $('.play').click(function(){
     initialize();
   });
 });
-
-
-
-
-
-
-
-
