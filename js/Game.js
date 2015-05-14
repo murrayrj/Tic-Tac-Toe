@@ -26,12 +26,14 @@ function winnerCheck(){
     (board[2]==currentPlayer && board[4]==currentPlayer && board[6]==currentPlayer)
   ){
     winningPlayer = currentPlayer;
-    $('.result').html("Player " + winningPlayer + " is a winner!");
+    $('.result').html("Player " + winningPlayer + " has won!");
+    $('.play').html("Click Here to Play");
   }
 }
 function tieCheck(){
   if (turn === 9 && winningPlayer === 0){
-    alert("It's a draw")
+    $('.result').html("It's a draw!");
+    $('.play').html("Click Here to Play");
   }
 }
 function checkValue(e) {
@@ -65,7 +67,8 @@ $(document).ready(function(){
       winnerCheck();
       changeTurn();
       if(winningPlayer===0){
-      $('.result').html("Player " + currentPlayer + " to move")};
+        $('.result').html("Player " + currentPlayer + " to move")
+      };
       tieCheck();
     }
   });
