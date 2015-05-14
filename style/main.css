@@ -2,11 +2,9 @@ table {
   margin: 0 auto;
 }
 td {
-/*  border: 2.5px solid #FF2D29;*/
   border: 2.5px dotted black;
   width: 150px;
   height: 150px;
-/*  text-align: center;*/
   box-sizing:border-box;
 }
 .box{
@@ -21,7 +19,6 @@ td {
   background: url("rsz_cat.jpg");
 }
 body{
-/*  background-color: #AADCBA;*/
   background: rgb(203,226,199) url("monopoly.jpg") no-repeat fixed center;
   margin-top: 3.5%;
 }
