@@ -9,7 +9,9 @@ function initialize(){
   turn = 0;
   currentPlayer = 1;
   $('.play').html('')
-  $('.result').html("Player " + currentPlayer + " to move")
+  $('.human').html('2 players')
+  $('.computer').html('1 player')
+  $('.result').html("")
   $('.box').removeClass( "colour1 colour2" )
 };
 
@@ -69,6 +71,8 @@ function takeAChanceOnMe (){
 
 $(document).ready(function(){
   $('.box').click(function(){
+    $('.human').html('')
+    $('.computer').html('')
     var cell = $(this).data("cell");
     checkValue(cell);
     if (checkValue(cell) === 0 && winningPlayer === 0) {
@@ -81,6 +85,11 @@ $(document).ready(function(){
       };
       tieCheck();
     }
+  });
+  $('.human').click(function(){
+    $('.result').html("Player 1 to move")
+    $('.human').html('')
+    $('.computer').html('')
   });
   $('.play').click(function(){
     initialize();
