@@ -3,6 +3,16 @@ var winningPlayer = 0;
 var turn = 0;
 var currentPlayer = 1;
 
+function initialize(){
+  board = [0,0,0,0,0,0,0,0,0];
+  winningPlayer = 0;
+  turn = 0;
+  currentPlayer = 1;
+  $('.play').html('')
+  $('.result').html("Player " + currentPlayer + " to move")
+  $('.box').removeClass( "colour1 colour2" )
+};
+
 function changeTurn(){
   if (turn % 2 === 0){
     currentPlayer = 2;
@@ -71,6 +81,9 @@ $(document).ready(function(){
       };
       tieCheck();
     }
+  });
+  $('.play').click(function(){
+    initialize();
   });
 });
 
