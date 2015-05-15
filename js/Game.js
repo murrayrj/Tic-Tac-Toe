@@ -3,7 +3,7 @@ var winningPlayer = 0;
 var turn = 0;
 var currentPlayer = 1;
 var vsComp = 0;
-var rand = Math.ceil((Math.random()*8))
+var rand = Math.ceil((Math.random()*8));
 
 function initialize(){
   board = [0,0,0,0,0,0,0,0,0];
@@ -86,7 +86,7 @@ function computerMove(){
         return i-3;
       }
     }
-    else if(board[i]==board[i+6] && board[i+3]==0){
+    else if(board[i]==board[i+6] && board[i+3]===0){
       return i+3;
     }
   }
@@ -102,16 +102,16 @@ function computerMove(){
   // else if(board[3]==0&&(0!==board[0]===board[8]||board[2]===1&&board[2]===board[6]){
   //   return 3;
   // }
-  if(board[8]==0&&(1==board[0]==board[4])||(1==board[5]==board[7])){
+  if(board[8]===0&&(1==board[0]==board[4])||(1==board[5]==board[7])){
     return 8;
   }
-  else if(board[6]==0&&(1==board[2]==board[4])||(1==board[3]==board[7])){
+  else if(board[6]===0&&(1==board[2]==board[4])||(1==board[3]==board[7])){
     return 6;
   }
-  else if(board[2]==0&&(1==board[4]==board[6])||(1==board[1]==board[5])||(1==board[0]==board[8])){
+  else if(board[2]===0&&(1==board[4]==board[6])||(1==board[1]==board[5])||(1==board[0]==board[8])){
     return 2;
   }
-  else if(board[0]==0&&(1==board[4]==board[8])||(1==board[1]==board[3])||(1==board[2]==board[6])){
+  else if(board[0]===0&&(1==board[4]==board[8])||(1==board[1]==board[3])||(1==board[2]==board[6])){
     return 0;
   }
 }
