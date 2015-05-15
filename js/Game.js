@@ -70,16 +70,15 @@ function computerMove(){
     }
   }
   for(var i =0; i<9; i++){
-    if(i%3===0 && board[i] === board[i+1] && board[i] !== 0 && board[i+2]===0){
-      return i+2;
+    if(i%3===0 && board[i] === board[i+2] && board[i] !== 0 && board[i+1]===0){
+      return i+1;
     }
     else if(i%3===1 && board[i] === board[i+1] && board[i] !== 0 && board[i-1]===0){
       return i-1;
     }
-    else if(i%3===0 && board[i] === board[i+2] && board[i] !== 0 && board[i+1]===0){
-      return i+1;
+    else if(i%3===0 && board[i] === board[i+1] && board[i] !== 0 && board[i+2]===0){
+      return i+2;
     }
-    
     else if(0!==board[i]===board[i+3]){
       if(i<3 && board[i+6]===0){
         return i+6;
@@ -131,6 +130,7 @@ $(document).ready(function(){
         computerMove();
         var bing = computerMove();
         currentPlayer = 2;
+        board[bing]=currentPlayer;
         turn++;
         changeColour(bing);
         console.log(bing);
